@@ -1,0 +1,60 @@
+.panel{
+    display: grid;
+
+    border: 15px solid;
+    border-color: rgb(122, 122, 122);
+    border-radius: 10px;
+
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+
+    background-color: rgb(122, 122, 122);
+}
+
+.add-button{
+    margin-right: 30px;
+}
+
+.close-button{
+    margin-left: 135px;
+    margin-top: 0px;
+
+    border: 15px solid rgb(236, 25, 25);
+    border-radius: 15px;
+    
+    background-color:rgb(236, 25, 25);
+}
+
+button{
+    border: 15px solid rgb(255, 255, 255);
+    border-radius: 15px;
+
+    margin-top: 30px;
+
+    background-color: rgb(255, 255, 255);
+}
+
+table{
+    border: 5px solid rgb(17, 17, 17);
+    border-radius: 10px;
+    background-color: rgb(43, 43, 43);
+}
+
+input{
+    border: 5px solid white;
+    border-radius: 10px;
+}
+text{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+th{
+    padding-left: 15px;
+    padding-right: 15px;
+}
