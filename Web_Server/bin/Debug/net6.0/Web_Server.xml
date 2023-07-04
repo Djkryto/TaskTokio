@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Web_Server</name>
+    </assembly>
+    <members>
+        <member name="T:Web_Server.Appliaction.IOrderRepository">
+            <summary>
+            Интерфейс для взаимодействия с репозиторием.
+            </summary>
+        </member>
+        <member name="M:Web_Server.Appliaction.IOrderRepository.AddAsync(Web_Server.Models.Order)">
+            <summary>
+            Добавление заказа в базу данных.
+            </summary>
+            <param name="order">Модель заказа</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Appliaction.IOrderRepository.Remove(Web_Server.Models.Order)">
+            <summary>
+            Удаления заказа из базы данных.
+            </summary>
+            <param name="order">Модель заказа</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Appliaction.IOrderRepository.SaveAsync">
+            <summary>
+            Сохранение изменений в базе данных.
+            </summary>
+            <param name="order">Модель заказа</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Appliaction.IOrderRepository.Get">
+            <summary>
+            Получение заказов из базы данных.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Web_Server.Appliaction.Enum.UrlLink">
+            <summary>
+            Класс хранящий ссылки на сервер.
+            </summary>
+        </member>
+        <member name="T:Web_Server.Appliaction.Builder.XMLStringBuilder">
+            <summary>
+            Класс создающий элемент xml файла модели Order.
+            </summary>
+        </member>
+        <member name="M:Web_Server.Appliaction.Builder.XMLStringBuilder.CreateOrder(System.Xml.XmlDocument,Web_Server.Models.Order)">
+            <summary>
+            Создать элемент order xml формата в виде Elementa.
+            </summary>
+            <param name="xmlDocument">XML Документ</param>
+            <param name="orderModel">Заказ</param>
+            <returns>XmlElement</returns>
+        </member>
+        <member name="T:Web_Server.Appliaction.Handler.XMLHandler">
+            <summary>
+            Класс обрабатывающий xml файл.
+            </summary>
+        </member>
+        <member name="M:Web_Server.Appliaction.Handler.XMLHandler.#ctor(Web_Server.Appliaction.Builder.XMLStringBuilder)">
+            <summary>
+            .ctor
+            </summary>
+            <param name="xmlStringBuilder"></param>
+        </member>
+        <member name="M:Web_Server.Appliaction.Handler.XMLHandler.Deserialize(System.String)">
+            <summary>
+            Конвертация xml строки в модель order.
+            </summary>
+            <param name="body">xml строка</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Appliaction.Handler.XMLHandler.Read(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Чтение xml файла из контектса.
+            </summary>
+            <param name="context">Контекст контроллера</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Appliaction.Handler.XMLHandler.CreateXmlDoc(Web_Server.Models.Order[])">
+            <summary>
+            Создание xml файла из массива моделей.
+            </summary>
+            <param name="orders">Масси заказов</param>
+            <returns></returns>
+        </member>
+        <member name="T:Web_Server.Controllers.ApiConroller">
+            <summary>
+            Api посредник между сервером и клиентом.
+            </summary>
+        </member>
+        <member name="M:Web_Server.Controllers.ApiConroller.#ctor(Web_Server.Handler.Service.HttpService)">
+            <summary>
+            .ctor
+            </summary>
+            <param name="httpService"></param>
+        </member>
+        <member name="M:Web_Server.Controllers.ApiConroller.Add">
+            <summary>
+            Отправка данных на сервеер.
+            </summary>
+            <returns>OkObjectResult</returns>
+        </member>
+        <member name="M:Web_Server.Controllers.ApiConroller.Remove">
+            <summary>
+            Отправка данных на сервеер.
+            </summary>
+            <returns>OkObjectResult</returns>
+        </member>
+        <member name="M:Web_Server.Controllers.ApiConroller.Get">
+            <summary>
+            Получение данных с сервера.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Web_Server.Controllers.ServerController">
+            <summary>
+            Серверный Api.
+            </summary>
+        </member>
+        <member name="M:Web_Server.Controllers.ServerController.#ctor(Web_Server.Handler.DataHandler)">
+            <summary>
+            .ctor
+            </summary>
+        </member>
+        <member name="M:Web_Server.Controllers.ServerController.Add">
+            <summary>
+            Обработка данных на добавление пользователя.
+            </summary>
+            <returns>OkObjectResult</returns>
+        </member>
+        <member name="M:Web_Server.Controllers.ServerController.Remove">
+            <summary>
+            Обработка данных на удаление пользователя.
+            </summary>
+            <returns>OkObjectResult</returns>
+        </member>
+        <member name="M:Web_Server.Controllers.ServerController.Get">
+            <summary>
+            Получение данных из базы данных.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Web_Server.Database.Context.Sql.SqlContext">
+            <summary>
+            Класс отвещающий за создание и обращение к базе данных.
+            </summary>
+        </member>
+        <member name="P:Web_Server.Database.Context.Sql.SqlContext.Ordes">
+            <summary>
+            Таблица заказов.
+            </summary>
+        </member>
+        <member name="M:Web_Server.Database.Context.Sql.SqlContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Web_Server.Database.Context.Sql.SqlContext})">
+            <summary>
+            .ctor
+            </summary>
+        </member>
+        <member name="T:Web_Server.Database.Repository.OrderRepository">
+            <inheritdoc />
+        </member>
+        <member name="M:Web_Server.Database.Repository.OrderRepository.#ctor(Web_Server.Database.Context.Sql.SqlContext)">
+            <summary>
+            .ctor.
+            </summary>
+            <param name="db">Модель базы данных.</param>
+        </member>
+        <member name="M:Web_Server.Database.Repository.OrderRepository.AddAsync(Web_Server.Models.Order)">
+            <inheritdoc />
+        </member>
+        <member name="M:Web_Server.Database.Repository.OrderRepository.Remove(Web_Server.Models.Order)">
+            <inheritdoc />
+        </member>
+        <member name="M:Web_Server.Database.Repository.OrderRepository.SaveAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Web_Server.Database.Repository.OrderRepository.Get">
+            <inheritdoc />
+        </member>
+        <member name="T:Web_Server.Handler.DataHandler">
+            <summary>
+            Обработчик полученных запросов.
+            </summary>
+        </member>
+        <member name="M:Web_Server.Handler.DataHandler.#ctor(Web_Server.Appliaction.IOrderRepository)">
+            <summary>
+            .ctor
+            </summary>
+            <param name="orderRepository"></param>
+        </member>
+        <member name="M:Web_Server.Handler.DataHandler.AddAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Добавление данных в базу данных.
+            </summary>
+            <param name="context">Контекст контроллера</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Handler.DataHandler.RemoveAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Удаление данных из базу данных.
+            </summary>
+            <param name="context">Контекст контроллера</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Handler.DataHandler.Get(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Получение данных из базу данных. Получение осуществляется записью в контекст.
+            </summary>
+            <param name="context">Контекст контроллера</param>
+            <returns></returns>
+        </member>
+        <member name="T:Web_Server.Handler.Service.HttpService">
+            <summary>
+            Класс отвечающий за запросы.
+            </summary>
+        </member>
+        <member name="M:Web_Server.Handler.Service.HttpService.#ctor(Web_Server.Appliaction.Handler.XMLHandler)">
+            <summary>
+            .ctor
+            </summary>
+            <param name="xmlHandler">Обрабочтки xml файла.</param>
+        </member>
+        <member name="M:Web_Server.Handler.Service.HttpService.Add(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Отправка данных на сервер через HttpClient.
+            </summary>
+            <param name="context">контекст контроллера</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Handler.Service.HttpService.Remove(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Отправка данных на сервер через HttpClient.
+            </summary>
+            <param name="context">контекст контроллера</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_Server.Handler.Service.HttpService.GetAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Получение данных с сервера через HttpClient.
+            </summary>
+            <param name="context">контекст контроллера</param>
+            <returns></returns>
+        </member>
+        <member name="T:Web_Server.Models.Order">
+            <summary>
+            Модель заказа.
+            </summary>
+        </member>
+        <member name="P:Web_Server.Models.Order.Id">
+            <summary>
+            Id в базе данных.
+            </summary>
+        </member>
+        <member name="P:Web_Server.Models.Order.Name">
+            <summary>
+            Наименование заказа.
+            </summary>
+        </member>
+        <member name="P:Web_Server.Models.Order.Client">
+            <summary>
+            ФИО клиента.
+            </summary>
+        </member>
+        <member name="P:Web_Server.Models.Order.Price">
+            <summary>
+            Стоимость заказа.
+            </summary>
+        </member>
+    </members>
+</doc>

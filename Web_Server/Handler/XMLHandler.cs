@@ -1,59 +1,47 @@
-﻿using System.Xml.Serialization;
-using System.Xml;
+﻿using Web_Server.Appliaction.Builder;
+using System.Xml.Serialization;
 using Web_Server.Models;
 using System.Text;
-using Web_Server.Builder;
+using System.Xml;
 
-namespace Web_Server.Handler
+namespace Web_Server.Appliaction.Handler
 {
+    /// <summary>
+    /// Класс обрабатывающий xml файл.
+    /// </summary>
     public class XMLHandler
     {
         private readonly XMLStringBuilder _xmlStringBuilder;
 
-        public XMLHandler(XMLStringBuilder xmlStringBuilder)
-        {
-            _xmlStringBuilder = xmlStringBuilder;
-        }
+        /// <summary>
+        /// .ctor
+        /// </summary>
+        /// <param name="xmlStringBuilder"></param>
+        public XMLHandler(XMLStringBuilder xmlStringBuilder) => _xmlStringBuilder = xmlStringBuilder;
 
+        /// <summary>
+        /// Конвертация xml строки в модель order.
+        /// </summary>
+        /// <param name="body">xml строка</param>
+        /// <returns></returns>
         public Order Deserialize(string body)
         {
             var order = new Order();
-            Console.WriteLine("Reading with Stream");
-            try
+            var serialize = new XmlSerializer(typeof(Order));
+
+            using (XmlReader reader = XmlReader.Create(new StringReader(body)))
             {
-                var serialize = new XmlSerializer(typeof(Order));
-
-                using (XmlReader reader = XmlReader.Create(new StringReader(body)))
-                {
-                    order = (Order)serialize.Deserialize(reader);
-                }
+                order = (Order)serialize.Deserialize(reader);
             }
-            catch (Exception ex)
-            {
-
-            }
-            // Declare an object variable of the type to be deserialized.
-
+            
             return order;
         }
 
-        public void Serialize()
-        {
-            var xmlDoc = new XmlSerializer(typeof(OrderDto));
-            var textWrite = new StringWriter();
-
-            var order = new OrderDto();
-
-            order.Name = "Суши";
-            order.Client = "Лерова Александра Денилова";
-            order.Price = 321.33f;
-
-
-            xmlDoc.Serialize(textWrite, order);
-            textWrite.Close();
-
-        }
-
+        /// <summary>
+        /// Чтение xml файла из контектса.
+        /// </summary>
+        /// <param name="context">Контекст контроллера</param>
+        /// <returns></returns>
         public string Read(HttpContext context)
         {
             string body = "";
@@ -73,35 +61,27 @@ namespace Web_Server.Handler
             return body;
         }
 
+        /// <summary>
+        /// Создание xml файла из массива моделей.
+        /// </summary>
+        /// <param name="orders">Масси заказов</param>
+        /// <returns></returns>
         public string CreateXmlDoc(Order[] orders)
         {
             var xmlDoc = new XmlDocument();
 
             XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
             XmlElement root = xmlDoc.DocumentElement;
+
             xmlDoc.InsertBefore(xmlDeclaration, root);
 
             XmlElement main = xmlDoc.CreateElement(string.Empty, "body", string.Empty);
             xmlDoc.AppendChild(main);
 
-            for(int i = 0;i < orders.Length; i++)
-                main.AppendChild(_xmlStringBuilder.Order(xmlDoc, orders[i].Id,orders[i].Name, orders[i].Client, orders[i].Price));
-
-            xmlDoc.Save("E:\\doc.xml");
+            for (int i = 0; i < orders.Length; i++)
+                main.AppendChild(_xmlStringBuilder.CreateOrder(xmlDoc, orders[i]));
 
             return xmlDoc.DocumentElement.OuterXml;
         }
-
-
-        // Code Read() 
-        //var result =_xmlHandler.Read(HttpContext);
-
-        //var xmlDoc = result.XMLDoc;
-        //var body = result.Body;
-
-        //var order = _xmlHandler.Deserialize(body);
-
-        //_orderRepository.Add(order);
-        //await _orderRepository.SaveAsync();
     }
 }

@@ -1,0 +1,2 @@
+F:\Dev\ASP\Task_Tokio\Web_Server\client\obj\Debug\client.esproj.SuggestedBindingRedirects.cache
+F:\Dev\ASP\Task_Tokio\Web_Server\client\obj\Debug\client.esproj.CoreCompileInputs.cache

@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import {Table} from './Table/Table.js'
-import './App.css';
+import './Css/App.css'
+import './Css/page.css'
+import {Page} from './Page/Page.js'
+import React, { Component } from 'react'
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Table />
-      </header>
+    <div className="App App-header">
+        <Page />
     </div>
   );
 }

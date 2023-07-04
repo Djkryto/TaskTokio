@@ -1,7 +1,6 @@
-
-import { NameElementXML } from "../Enum/NameElementXML";
-import { initModelXML } from "../Handler/XmlHandler";
 import { pathReuqst } from "../Enum/PathReuqst"
+import { initModelXML } from "../Handler/XmlHandler"
+import { NameElementXML } from "../Enum/NameElementXML"
 
 const headPost = (data) =>{ 
     return {
@@ -16,16 +15,13 @@ const headPost = (data) =>{
 class Repository{
 
     Add = async (order) => {
-
-        const xml = initModelXML(order)
-        const data = new XMLSerializer().serializeToString(xml);
+        const data = initModelXML(order);
         await fetch(pathReuqst.Add, headPost(data))
     }
     
     Remove = async (order) => {
-        const xml = initModelXML(order)
-        const data = new XMLSerializer().serializeToString(xml);
-        fetch(pathReuqst.Remove, headPost(data))
+        const data = initModelXML(order)
+        await fetch(pathReuqst.Remove, headPost(data))
     }
     
     Get = async (setArrayOrder) => {

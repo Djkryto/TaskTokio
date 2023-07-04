@@ -1,11 +1,7 @@
 import { parseXML } from "jquery"
 
-export const convertToJSON = () => {
-
-}
-
-export const initModelXML = (data) =>
-    parseXML(
+export const initModelXML = (data) => {
+   const xml = parseXML(
         "<Order>" +
         '<id>' + data.id + '</id>'+
         '<name>' + data.name + '</name>'+
@@ -13,3 +9,6 @@ export const initModelXML = (data) =>
         '<price>' + data.price + '</price>'
         + "</Order>"
         )
+
+        return new XMLSerializer().serializeToString(xml);
+}
